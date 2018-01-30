@@ -17,10 +17,15 @@ AuthorSchema.virtual('name').get(function () {  return this.family_name +', '+ t
 
 // Virtual for this author instance URL.
 AuthorSchema.virtual('url').get(function () {  return '/catalog/author/'+ this._id});
-
-AuthorSchema.virtual('date_of_birth_formatted').get(function () {  return moment(this.date_of_birth).format('MMMM Do, YYYY');});
-
-AuthorSchema.virtual('date_of_death_formatted').get(function () {  return moment(this.date_of_death).format('MMMM Do, YYYY');});
+AuthorSchema.virtual('date_of_birth_formatted').get(function () {  
+  return this.date_of_birth ? moment(this.date_of_birth).format('MMMM Do, YYYY') : '';
+});
+AuthorSchema.virtual('date_of_death_formatted').get(function () {  
+  return this.date_of_death ? moment(this.date_of_death).format('MMMM Do, YYYY') : '';
+});
+AuthorSchema.virtual('lifespan').get(function () {  
+  return this.date_of_birth_formatted + ' - ' + this.date_of_death_formatted;
+});
 
 // Export model.
 module.exports = mongoose.model('Author', AuthorSchema);
