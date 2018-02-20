@@ -4,17 +4,22 @@ block content
 
   h1 Genre: #{genre.name}
   
-    if genre_books.length
-        h4 Books
-        
-        dl
-        each book in genre_books
-          dt 
-            a(href=book.url) #{book.title}
-          dd #{book.summary}
-    else
-        hr
-        
-        p
-          a(href=genre.url+'/delete') Delete genre 
+  if genre_books.length
+      h4 Books
+      
+      dl
+      each book in genre_books
+        dt 
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+  else
+    p This genre has no books yet.
+  
+  hr
+  p
+    a(href=genre.url+'/delete') Delete genre 
+  p
+    a(href=genre.url+'/update') Update genre 
+    
+
       
